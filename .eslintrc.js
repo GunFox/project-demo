@@ -8,6 +8,7 @@ module.exports = {
     browser: true,
     node: true,
     es6: true,
+    jquery: true
   },
   extends: ['plugin:vue/recommended', 'eslint:recommended'],
 
@@ -118,7 +119,7 @@ module.exports = {
     'no-new-wrappers': 2,
     'no-obj-calls': 2,
     'no-octal': 2,
-    'no-octal-escape': 2,
+    // 'no-octal-escape': 2,
     'no-path-concat': 2,
     'no-proto': 2,
     'no-redeclare': 2,
