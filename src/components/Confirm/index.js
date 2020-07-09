@@ -9,6 +9,18 @@ const defaults = {
   text: '确定删除该内容吗？'
 }
 const ConfirConstructor = Vue.extend(confirm)
+ConfirConstructor.prototype.close = function() {
+  if (confirmEl) {
+    confirmEl = undefined
+  }
+  this.showPop = false
+  setTimeout(() => {
+    if (this.$el && this.$el.parentNode) {
+      this.$el.parentNode.removeChild(this.$el)
+    }
+    this.$destroy()
+  }, 300)
+}
 const confirmChoose = function(content = {}) {
   if (confirmEl) {
     return {
@@ -20,21 +32,14 @@ const confirmChoose = function(content = {}) {
       el: document.createElement('div')
     })
     document.body.appendChild(instance.$el)
-    instance.content = Object.assign({}, defaults, content)
+    instance.content = { ...defaults, ...content }
     instance.ok = function() {
       resolve(true)
-      instance.showPop = false
-      confirmEl = null
+      instance.close()
     }
     instance.cancel = function() {
       reject(false)
-      instance.showPop = false
-      confirmEl = null
-    }
-    instance.close = function() {
-      reject(false)
-      instance.showPop = false
-      confirmEl = null
+      instance.close()
     }
     confirmEl = instance
   })

@@ -19,6 +19,12 @@ export default {
       showPop: true,
       content: {}
     }
+  },
+  mounted() {
+    document.body.style.overflow = 'hidden'
+    this.$once('hook:destroyed', () => {
+      document.body.style.overflow = 'auto'
+    })
   }
 }
 </script>
