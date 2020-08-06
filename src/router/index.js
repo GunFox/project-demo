@@ -109,6 +109,18 @@ export const constantRoutes = [
       }
     ]
   },
+  {
+    path: '/lazyLoad',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'LazyLoad',
+        component: () => import('@/views/lazyLoad/index'),
+        meta: {title: 'LazyLoad', icon: 'form'}
+      }
+    ]
+  },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
